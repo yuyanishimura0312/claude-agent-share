@@ -3,8 +3,7 @@
 手順：
 1. WebSearchとWebFetchを使って情報を収集
 2. 調査結果を文章（地の文）でまとめて報告
-3. Research Dashboardにsave-research.sh --content-fileで全文保存
-4. commit → push して公開版を更新
-5. 保存した内容を簡潔に報告
+3. 情報源を明記
+4. 推測と事実を明確に区別する
 
 調査テーマ: $ARGUMENTS

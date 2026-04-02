@@ -3,96 +3,192 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code Agent Catalog</title>
+<title>Claude Code Agent Catalog - MIRATUKU</title>
 <style>
+  :root {
+    --brand: #783c28;
+    --brand-dark: #4a2418;
+    --brand-light: #96503a;
+    --accent: #c87864;
+    --accent-light: #d9998a;
+    --accent-subtle: #e8c4bb;
+    --bg: #faf8f5;
+    --bg-alt: #f3efe9;
+    --bg-warm: #ede6dc;
+    --surface: #ffffff;
+    --text: #1a1a1a;
+    --text-secondary: #5c534b;
+    --text-tertiary: #9a918a;
+    --border: #e8e2da;
+    --border-light: #f0ece6;
+  }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
-    background: #faf8f5; color: #1a1a1a; min-height: 100vh;
+    background: var(--bg); color: var(--text); min-height: 100vh;
+    line-height: 1.7;
   }
-  .header {
-    background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
-    padding: 48px 24px 40px; text-align: center; color: #fff;
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, var(--brand) 0%, var(--brand-light) 50%, var(--accent) 100%);
+    padding: 56px 24px 48px; text-align: center; color: #fff;
   }
-  .header h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-  .header p { font-size: 15px; opacity: 0.85; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+  .hero-label {
+    font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase;
+    opacity: 0.7; margin-bottom: 12px;
+  }
+  .hero h1 { font-size: 28px; font-weight: 700; margin-bottom: 12px; }
+  .hero p {
+    font-size: 15px; opacity: 0.85; max-width: 560px; margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* Install box */
   .install-box {
-    max-width: 720px; margin: -24px auto 0; padding: 0 24px; position: relative; z-index: 1;
+    max-width: 720px; margin: -24px auto 0; padding: 0 24px;
+    position: relative; z-index: 1;
   }
   .install-card {
-    background: #1e1b2e; border-radius: 12px; padding: 20px 24px;
-    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace; font-size: 14px;
-    color: #e2e0f0; display: flex; align-items: center; gap: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    background: var(--brand-dark); border-radius: 10px; padding: 18px 20px;
+    font-family: 'SF Mono', 'Menlo', 'Consolas', monospace; font-size: 13px;
+    color: #e8c4bb; display: flex; align-items: center; gap: 12px;
+    box-shadow: 0 4px 20px rgba(74,36,24,0.2);
   }
   .install-card code { flex: 1; white-space: nowrap; overflow-x: auto; }
-  .install-card .prefix { color: #a78bfa; }
+  .install-card .prefix { color: var(--accent); }
   .copy-btn {
-    background: #7c3aed; color: #fff; border: none; padding: 8px 16px;
-    border-radius: 6px; font-size: 13px; font-weight: 500; cursor: pointer;
+    background: var(--brand); color: #fff; border: none; padding: 8px 16px;
+    border-radius: 6px; font-size: 12px; font-weight: 500; cursor: pointer;
     flex-shrink: 0; transition: background 0.2s;
   }
-  .copy-btn:hover { background: #6d28d9; }
-  .copy-btn.copied { background: #059669; }
+  .copy-btn:hover { background: var(--brand-light); }
+  .copy-btn.copied { background: #2e7d32; }
+
+  /* Container */
   .container { max-width: 720px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* Section */
   .section-title {
-    font-size: 18px; font-weight: 600; color: #1a1a1a; margin-bottom: 16px;
-    padding-top: 16px;
+    font-size: 16px; font-weight: 600; color: var(--brand);
+    margin: 32px 0 16px; padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent-subtle);
   }
+
+  /* Guide */
+  .guide {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
+    padding: 28px; margin-bottom: 8px;
+  }
+  .guide h3 {
+    font-size: 15px; font-weight: 600; color: var(--brand); margin-bottom: 16px;
+  }
+  .guide-steps {
+    display: grid; gap: 16px;
+  }
+  .step {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .step-num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent-subtle); color: var(--brand);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .step-content { flex: 1; }
+  .step-content h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
+  .step-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .step-content code {
+    font-family: 'SF Mono', 'Menlo', monospace; background: var(--bg-alt);
+    padding: 2px 6px; border-radius: 3px; font-size: 12px; color: var(--brand);
+  }
+
+  /* Prereq */
+  .prereq {
+    background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px;
+    padding: 20px 24px; margin-bottom: 24px;
+  }
+  .prereq h4 { font-size: 13px; font-weight: 600; color: var(--text-secondary); margin-bottom: 8px; }
+  .prereq ul {
+    list-style: none; font-size: 13px; color: var(--text-secondary); line-height: 2;
+  }
+  .prereq ul li::before { content: "- "; color: var(--accent); font-weight: 600; }
+
+  /* Use case */
+  .use-cases {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px;
+  }
+  @media (max-width: 600px) { .use-cases { grid-template-columns: 1fr; } }
+  .use-case {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 16px;
+  }
+  .use-case h4 {
+    font-size: 13px; font-weight: 600; color: var(--brand); margin-bottom: 6px;
+  }
+  .use-case p { font-size: 12px; color: var(--text-secondary); line-height: 1.5; }
+  .use-case code {
+    font-family: 'SF Mono', 'Menlo', monospace; background: var(--bg-alt);
+    padding: 1px 5px; border-radius: 3px; font-size: 11px; color: var(--brand);
+  }
+
+  /* Agent card */
   .agent-card {
-    background: #fff; border: 1px solid #e8e2da; border-radius: 10px;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 10px;
     padding: 20px; margin-bottom: 12px; transition: box-shadow 0.2s;
   }
-  .agent-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-  .agent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; }
+  .agent-card:hover { box-shadow: 0 2px 12px rgba(74,36,24,0.06); }
+  .agent-header { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
   .agent-icon {
     width: 36px; height: 36px; border-radius: 8px; display: flex;
     align-items: center; justify-content: center; font-size: 14px;
     font-weight: 700; color: #fff; flex-shrink: 0;
   }
-  .agent-name { font-size: 15px; font-weight: 600; }
+  .agent-name { font-size: 15px; font-weight: 600; color: var(--text); }
   .agent-cmd {
     font-family: 'SF Mono', 'Menlo', monospace; font-size: 12px;
-    color: #7c3aed; background: #ede9fe; padding: 2px 8px;
+    color: var(--brand); background: var(--accent-subtle); padding: 2px 8px;
     border-radius: 4px; margin-left: 8px;
   }
-  .agent-desc { font-size: 13px; color: #5c534b; line-height: 1.6; margin-bottom: 10px; }
-  .agent-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .agent-desc {
+    font-size: 13px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 10px;
+  }
+  .agent-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
   .tag {
     font-size: 11px; padding: 2px 8px; border-radius: 4px;
-    background: #f3efe9; color: #5c534b;
+    background: var(--bg-alt); color: var(--text-secondary);
   }
-  .tag.multi-agent { background: #ede9fe; color: #7c3aed; }
-  .agent-actions { display: flex; gap: 8px; margin-top: 12px; }
+  .tag.multi-agent { background: var(--accent-subtle); color: var(--brand); }
+  .agent-actions { display: flex; gap: 8px; }
   .btn-install {
-    font-size: 12px; padding: 6px 14px; border-radius: 6px;
-    border: 1px solid #e8e2da; background: #fff; color: #5c534b;
-    cursor: pointer; font-family: 'SF Mono', 'Menlo', monospace;
-    transition: all 0.15s;
+    font-size: 11px; padding: 6px 12px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--surface); color: var(--text-secondary);
+    cursor: pointer; font-family: 'SF Mono', 'Menlo', monospace; transition: all 0.15s;
   }
-  .btn-install:hover { background: #f3efe9; color: #1a1a1a; }
+  .btn-install:hover { background: var(--bg-alt); color: var(--text); }
   .btn-install.copied { background: #e6f4e6; color: #2e7d32; border-color: #a5d6a7; }
   .btn-view {
     font-size: 12px; padding: 6px 14px; border-radius: 6px;
-    border: none; background: #7c3aed; color: #fff;
+    border: none; background: var(--brand); color: #fff;
     cursor: pointer; text-decoration: none; transition: background 0.2s;
   }
-  .btn-view:hover { background: #6d28d9; }
-  .how-to { background: #fff; border: 1px solid #e8e2da; border-radius: 10px; padding: 24px; margin-bottom: 24px; }
-  .how-to h3 { font-size: 15px; font-weight: 600; margin-bottom: 12px; }
-  .how-to ol { padding-left: 20px; font-size: 13px; color: #5c534b; line-height: 2; }
-  .how-to code {
-    font-family: 'SF Mono', 'Menlo', monospace; background: #f3efe9;
-    padding: 2px 6px; border-radius: 3px; font-size: 12px;
+  .btn-view:hover { background: var(--brand-light); }
+
+  /* Footer */
+  .footer {
+    text-align: center; padding: 32px 24px; font-size: 12px; color: var(--text-tertiary);
+    border-top: 1px solid var(--border);
   }
-  .footer { text-align: center; padding: 24px; font-size: 12px; color: #9a918a; }
+  .footer a { color: var(--accent); text-decoration: none; }
+  .footer a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
 
-<div class="header">
+<div class="hero">
+  <div class="hero-label">MIRATUKU</div>
   <h1>Claude Code Agent Catalog</h1>
-  <p>Claude Code のスラッシュコマンドとして使えるエージェントチームのカタログ。ワンコマンドでインストールできます。</p>
+  <p>Claude Code のスラッシュコマンドとして使えるエージェントチーム。ワンコマンドでインストールして、すぐに使い始められます。</p>
 </div>
 
 <div class="install-box">
@@ -104,23 +200,144 @@
 
 <div class="container">
 
-  <div class="how-to">
-    <h3>インストール方法</h3>
-    <ol>
-      <li>上のコマンドをターミナルで実行すると全エージェントがインストールされます</li>
-      <li>個別インストール: <code>curl -sL .../install.sh | bash -s -- deep-research</code></li>
-      <li>手動: エージェントファイルをダウンロードして <code>~/.claude/commands/</code> に配置</li>
-      <li>Claude Code で <code>/agent-name</code> として使えるようになります</li>
-    </ol>
+  <!-- Prerequisites -->
+  <div class="section-title">はじめに</div>
+  <div class="prereq">
+    <h4>必要なもの</h4>
+    <ul>
+      <li><a href="https://claude.com/claude-code" style="color:var(--brand)">Claude Code</a> がインストール済みであること</li>
+      <li>ターミナル（Mac / Linux / WSL）が使えること</li>
+      <li>curl コマンドが使えること（ほとんどの環境でデフォルトで利用可能）</li>
+    </ul>
   </div>
 
+  <!-- How to install -->
+  <div class="guide">
+    <h3>インストール方法</h3>
+    <div class="guide-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>全エージェントを一括インストール</h4>
+          <p>ターミナルで以下を実行するだけです。<code>~/.claude/commands/</code> にエージェントファイルが配置されます。</p>
+          <p style="margin-top:6px"><code>curl -sL https://yuyanishimura0312.github.io/claude-agent-share/install.sh | bash</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>個別にインストールしたい場合</h4>
+          <p>特定のエージェントだけを選んでインストールできます。</p>
+          <p style="margin-top:6px"><code>curl -sL .../install.sh | bash -s -- deep-research cxo-meeting</code></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>Claude Code で使う</h4>
+          <p>Claude Code を起動し、プロンプトに <code>/deep-research AI倫理の最新動向</code> のようにスラッシュコマンドとテーマを入力するだけです。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- How to use -->
+  <div class="section-title">使い方</div>
+
+  <div class="guide">
+    <h3>基本的な使い方</h3>
+    <div class="guide-steps">
+      <div class="step">
+        <div class="step-num">A</div>
+        <div class="step-content">
+          <h4>スラッシュコマンドとして実行</h4>
+          <p>Claude Code のプロンプトで <code>/コマンド名 引数</code> と入力します。例えば、ディープリサーチなら <code>/deep-research 再生可能エネルギー政策の国際比較</code> と入力してEnterを押すだけです。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">B</div>
+        <div class="step-content">
+          <h4>エージェントが自動で動く</h4>
+          <p>エージェントは指示に従って Web検索、論文検索、分析、レポート作成を自動で行います。途中で質問されることもありますが、基本的には待っているだけでOKです。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">C</div>
+        <div class="step-content">
+          <h4>結果を受け取る</h4>
+          <p>調査や分析が終わると、レポートやアクションプランが表示されます。追加の質問や深掘りもその場で依頼できます。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Use case examples -->
+  <div class="section-title">活用例</div>
+  <div class="use-cases">
+    <div class="use-case">
+      <h4>経営判断の検討</h4>
+      <p><code>/cxo-meeting 新規事業として教育プログラムを開始すべきか</code><br>7人のCxOが財務・戦略・組織の観点から議論し、Go/No-Go判断を提示。</p>
+    </div>
+    <div class="use-case">
+      <h4>市場調査</h4>
+      <p><code>/deep-research 日本のインパクト投資市場の現状と展望</code><br>Web+学術論文から体系的に調査し、出典付きレポートを作成。</p>
+    </div>
+    <div class="use-case">
+      <h4>競合分析</h4>
+      <p><code>/competitor-scan Deloitte Monitor Institute</code><br>組織概要・サービス・ポジショニングを網羅的に調査。</p>
+    </div>
+    <div class="use-case">
+      <h4>アプリ品質チェック</h4>
+      <p><code>/qa-review ~/projects/my-app</code><br>UI/機能/セキュリティを5人の専門家がレビューし、スコアリング。</p>
+    </div>
+    <div class="use-case">
+      <h4>ベストプラクティス調査</h4>
+      <p><code>/best-practice リモートチームの心理的安全性</code><br>CMO+GRADEフレームワークで構造化された知見を提供。</p>
+    </div>
+    <div class="use-case">
+      <h4>学術翻訳</h4>
+      <p><code>/translate-academic 社会的処方の概念と実践</code><br>人類学・社会科学の専門用語を正確に反映した英語に変換。</p>
+    </div>
+  </div>
+
+  <!-- Agent list -->
   <div class="section-title">エージェント一覧</div>
   <div id="agent-list"></div>
+
+  <!-- Update & customize -->
+  <div class="section-title">カスタマイズ</div>
+  <div class="guide">
+    <h3>エージェントを自分用にカスタマイズする</h3>
+    <div class="guide-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h4>ファイルを編集</h4>
+          <p><code>~/.claude/commands/</code> にあるmdファイルを好きなエディタで開いて編集できます。プロンプトを変更したり、自分の業務に合った指示を追加してください。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h4>新しいエージェントを作る</h4>
+          <p><code>~/.claude/commands/my-agent.md</code> を作成するだけで、<code>/my-agent</code> として使えます。<code>$ARGUMENTS</code> と書くとコマンドの引数が挿入されます。</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h4>更新する</h4>
+          <p>新バージョンが出たら、既存ファイルを削除して再インストールしてください。<code>rm ~/.claude/commands/deep-research.md</code> → 再度インストールコマンド実行。</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <div class="footer">
-  Built with Claude Code
+  <p>Built by <a href="https://miratuku.com">MIRATUKU</a> with Claude Code</p>
+  <p style="margin-top:4px"><a href="https://github.com/yuyanishimura0312/claude-agent-share">GitHub</a></p>
 </div>
 
 <script>
@@ -129,80 +346,79 @@ const agents = [
     name: "Deep Research",
     cmd: "/deep-research",
     file: "deep-research",
-    icon: "DR", color: "#6d28d9",
-    desc: "学術論文とWebを横断する多層調査。Phase 1（スコープ定義）からPhase 5（検証・統合）までのパイプラインで体系的にリサーチを実行。",
-    tags: ["multi-agent", "academic", "web-search", "5-phase"]
+    icon: "DR", color: "#783c28",
+    desc: "学術論文とWebを横断する多層調査。スコープ定義 → 計画策定 → 情報収集 → 三角検証 → 統合分析 → レポート作成の6フェーズパイプラインで体系的にリサーチを実行します。quick / standard / deep の3モードに対応。",
+    tags: ["multi-agent", "academic", "web-search", "6-phase"]
   },
   {
     name: "Best Practice Team",
     cmd: "/best-practice",
     file: "best-practice",
-    icon: "BP", color: "#2563eb",
-    desc: "CMO + GRADEフレームワークによるベストプラクティスの構造解析。3並列エージェントが調査・分析・統合を担当。",
+    icon: "BP", color: "#96503a",
+    desc: "CMO（Chief Method Officer）+ GRADEフレームワークによるベストプラクティスの構造解析。3つの並列エージェントが調査・分析・統合を担当し、実行可能なフレームワークとして提供します。",
     tags: ["multi-agent", "framework", "CMO", "GRADE"]
   },
   {
     name: "CxO Meeting",
     cmd: "/cxo-meeting",
     file: "cxo-meeting",
-    icon: "CX", color: "#dc2626",
-    desc: "CEO/CFO/COO/CMO/CTO/CHRO/CSOの7人のCxOエージェントによる経営会議シミュレーション。多角的な経営判断を支援。",
+    icon: "CX", color: "#c87864",
+    desc: "CEO / CFO / COO / CMO / CTO / CHRO / CSO の7人のCxOエージェントによる経営会議。standard / deep_dive / quick / brainstorm / crisis の5つの会議モードに対応。各CxOが経営理論をベースに分析し、CEOが最終判断を統合します。",
     tags: ["multi-agent", "7-agents", "management", "simulation"]
   },
   {
     name: "QA Review Team",
     cmd: "/qa-review",
     file: "qa-review",
-    icon: "QA", color: "#059669",
-    desc: "5人のQA専門エージェントによるアプリケーション品質レビュー。機能・UX・セキュリティ・パフォーマンスを網羅的にチェック。",
+    icon: "QA", color: "#4a2418",
+    desc: "QAリード + UI/UXテスター + 機能テスター + コードレビュアー + バグフィクサーの5人の専門エージェントによるアプリケーション品質レビュー。100点スコアリングとGo/No-Go判断を含む品質レポートを生成します。",
     tags: ["multi-agent", "5-agents", "testing", "quality"]
   },
   {
     name: "Academic Search",
     cmd: "/academic-search",
     file: "academic-search",
-    icon: "AS", color: "#4f46e5",
-    desc: "Semantic Scholar / arXiv等の学術データベースから論文を検索し、文献マップを作成。研究動向の把握に。",
+    icon: "AS", color: "#96503a",
+    desc: "Semantic Scholar / arXiv 等の学術データベースから論文を検索し、文献マップを作成。主要な研究動向、キーパーソン、引用ネットワークを可視化します。",
     tags: ["academic", "semantic-scholar", "literature-map"]
   },
   {
-    name: "Research Team",
+    name: "Research",
     cmd: "/research",
     file: "research",
-    icon: "RT", color: "#7c3aed",
-    desc: "Webを使った情報収集と調査レポート作成。シンプルだが汎用性の高い調査エージェント。",
-    tags: ["web-search", "report"]
+    icon: "RS", color: "#783c28",
+    desc: "Webを使った情報収集と調査レポート作成。シンプルだが汎用性の高い調査エージェントで、短時間で概要を把握したいときに最適です。",
+    tags: ["web-search", "report", "quick"]
   },
   {
     name: "Parallel Report",
     cmd: "/parallel-report",
     file: "parallel-report",
-    icon: "PR", color: "#0891b2",
-    desc: "複数のエージェントを並列に起動し、高速にレポートを生成。調査・分析・執筆を同時進行。",
-    tags: ["multi-agent", "parallel", "report"]
+    icon: "PR", color: "#c87864",
+    desc: "複数のエージェントを並列に起動し、高速にレポートを生成。調査・分析・執筆を同時進行で行い、通常より短い時間で構造化されたレポートを完成させます。",
+    tags: ["multi-agent", "parallel", "report", "fast"]
   },
   {
     name: "Competitor Scan",
     cmd: "/competitor-scan",
     file: "competitor-scan",
-    icon: "CS", color: "#ea580c",
-    desc: "Playwright + Web検索による競合調査。基本情報、サービス、ポジショニング、オンラインプレゼンスを網羅的に分析。",
-    tags: ["playwright", "web-scraping", "analysis"]
+    icon: "CS", color: "#96503a",
+    desc: "Playwright + Web検索による競合調査。組織概要、サービス一覧、ポジショニング、オンラインプレゼンス、最近の動向を網羅的に分析し、自社との比較ポイントを整理します。",
+    tags: ["playwright", "web-scraping", "competitive-analysis"]
   },
   {
     name: "Translate Academic",
     cmd: "/translate-academic",
     file: "translate-academic",
-    icon: "TA", color: "#475569",
-    desc: "人類学・社会科学の学術用語に対応した英語翻訳。論文や学会発表向けのフォーマルな英語に変換。",
-    tags: ["translation", "academic", "anthropology"]
+    icon: "TA", color: "#4a2418",
+    desc: "人類学・社会科学の学術用語に対応した英語翻訳。論文投稿や学会発表向けのフォーマルな学術英語に変換します。分野固有のニュアンスを正確に反映。",
+    tags: ["translation", "academic", "anthropology", "social-science"]
   },
 ];
 
 function renderAgents() {
   const list = document.getElementById('agent-list');
   const baseUrl = 'https://github.com/yuyanishimura0312/claude-agent-share/blob/main/agents';
-  const rawUrl = 'https://raw.githubusercontent.com/yuyanishimura0312/claude-agent-share/main/agents';
 
   list.innerHTML = agents.map(a => {
     const tags = a.tags.map(t =>
@@ -220,7 +436,7 @@ function renderAgents() {
         <div class="agent-tags">${tags}</div>
         <div class="agent-actions">
           <button class="btn-install" onclick="copySingle(this, '${a.file}')">
-            curl -sL .../install.sh | bash -s -- ${a.file}
+            個別インストール
           </button>
           <a href="${baseUrl}/${a.file}.md" target="_blank" class="btn-view">ソースを見る</a>
         </div>
@@ -239,12 +455,10 @@ function copyInstall(btn) {
 function copySingle(btn, file) {
   const cmd = `curl -sL https://yuyanishimura0312.github.io/claude-agent-share/install.sh | bash -s -- ${file}`;
   navigator.clipboard.writeText(cmd);
+  const orig = btn.textContent;
   btn.textContent = 'コピー済!';
   btn.classList.add('copied');
-  setTimeout(() => {
-    btn.textContent = `curl -sL .../install.sh | bash -s -- ${file}`;
-    btn.classList.remove('copied');
-  }, 2000);
+  setTimeout(() => { btn.textContent = orig; btn.classList.remove('copied'); }, 2000);
 }
 
 renderAgents();
