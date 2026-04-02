@@ -16,8 +16,13 @@ AGENTS=(
   parallel-report
   cxo-meeting
   qa-review
+  ux-review
   competitor-scan
   translate-academic
+  design
+  engineer
+  execution
+  management
 )
 
 echo "=== Claude Code Agent Installer ==="
